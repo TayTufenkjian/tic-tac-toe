@@ -29,7 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
             grid[row][col] = char;
         }
 
-        return {addToGrid};
+        // Function for getting a value from the grid
+        function getFromGrid(i, j) {
+            return grid[i][j];
+        }
+
+        return {addToGrid, getFromGrid};
     })();
 
     // Factory function to create players
@@ -75,6 +80,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (playCounter >= 5) {
 
                         // Check rows
+                       for (let i = 0; i < 3; i++) {
+                           let rowString = '';
+                           for (let j = 0; j < 3; j++) {
+                               switch (GameBoard.getFromGrid(i, j)) {
+                                   case 'X':
+                                       rowString += 'X';
+                                       break;
+                                    case 'O':
+                                        rowString += 'O';
+                                        break;
+                                    default:
+                                        break;
+                               }
+                           }
+                           if (rowString === 'XXX') {
+                               return console.log('Xs win');
+                           } else if (rowString === 'OOO') {
+                                return console.log('Os win');
+                               }
+                           else {
+                               continue;
+                           }
+                       }
+                    
 
                         // Check columns
 
