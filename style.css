@@ -8,7 +8,7 @@ body {
 }
 
 main {
-    align-items: center;
+    align-content: center;
     display: grid;
     grid-template-columns: 1fr;
     height: 100%;
@@ -22,6 +22,9 @@ main {
 }
 
 .grid-square {
+    align-content: center;
     border: 1px solid black;
+    display: grid;
     height: 150px;
+    justify-content: center;
 }
