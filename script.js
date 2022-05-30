@@ -36,12 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
         let squares = document.querySelectorAll('.grid-square');
         squares.forEach(square => square.addEventListener('click', (event) => {
                 let targetSquare = event.target;
-                if (currentPlayer === player1) {
-                    targetSquare.textContent = player1.playSymbol;
-                    currentPlayer = player2;
-                } else {
-                    targetSquare.textContent = player2.playSymbol;
-                    currentPlayer = player1;
+                // Check that the target square is empty
+                if (targetSquare.textContent === '') {
+                    if (currentPlayer === player1) {
+                        targetSquare.textContent = player1.playSymbol;
+                        currentPlayer = player2;
+                    } else {
+                        targetSquare.textContent = player2.playSymbol;
+                        currentPlayer = player1;
+                    }
                 }
             })
         )
