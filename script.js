@@ -121,8 +121,9 @@ function playGame(name1, name2) {
     // Player 1 goes first
     let currentPlayer = player1;
 
-    // Initialize the count of plays
+    // Initialize the count of plays and winner variable
     let playCounter = 0;
+    let winner;
 
     // Function to display game result
     function showGameResult(winner) {
@@ -137,8 +138,8 @@ function playGame(name1, name2) {
             // Get the square that was clicked
             let targetSquare = event.target;
 
-            // Make sure that square is empty
-            if (targetSquare.textContent === '') {
+            // Make sure the square is empty and that there isn't a winner yet
+            if (targetSquare.textContent === '' && !winner) {
 
                 // Mark the square with the player's symbol
                 // Add the player's symbol to the board array
@@ -157,8 +158,6 @@ function playGame(name1, name2) {
                 // After the fifth play, there are three Xs on the board
                 // so at that point we should check for a win
                 if (playCounter >= 5) {
-
-                    let winner;
 
                     // Check rows
                 for (let i = 0; i < 3; i++) {
