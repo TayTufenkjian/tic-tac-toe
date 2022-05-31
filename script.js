@@ -1,13 +1,21 @@
-document.addEventListener('DOMContentLoaded', () => {
-
-    // Create the initial game board
-    GameBoard.createGrid();
-    
+document.addEventListener('DOMContentLoaded', () => { 
     // Listen for a click on the Start New Game button
     let startButton = document.getElementById('start');
     startButton.addEventListener('click', () => {
+        // Clear name inputs, game board, game result
+        document.getElementById('players').textContent = '';
         document.getElementById('game-result').textContent = '';
-        Game();
+        document.getElementById('game-board').textContent = '';
+        // Allow user to enter player names
+        showPlayerNameInputs();
+        let enterButton = document.querySelector('#players button');
+        let player1, player2;
+        enterButton.addEventListener('click', () => {
+            player1 = document.getElementById('namePlayer1').value;
+            player2 = document.getElementById('namePlayer2').value;
+            // Start the game with those player names
+            playGame(player1, player2);
+        });
     })
 });
 
@@ -56,23 +64,59 @@ const GameBoard = (() => {
 })();
 
 
+// Create and display fields so the user can enter player names
+function showPlayerNameInputs() {
+    let playersDiv = document.getElementById('players');
+    let divPlayer1 = document.createElement('div');
+    let divPlayer2 = document.createElement('div');
+
+    // Create input and label for the name of player1 
+    let nameInput1 = document.createElement('input');
+    nameInput1.id = 'namePlayer1';
+    let nameLabel1 = document.createElement('label');
+    nameLabel1.setAttribute('for', nameInput1.id);
+    nameLabel1.textContent = 'Name of Player 1:';
+    divPlayer1.append(nameLabel1, nameInput1);
+
+    // Create input and label for the name of player2
+    let nameInput2 = document.createElement('input');
+    nameInput2.id = 'namePlayer2';
+    let nameLabel2 = document.createElement('label');
+    nameLabel2.setAttribute('for', nameInput2.id);
+    nameLabel2.textContent = 'Name of Player 2:';
+    divPlayer2.append(nameLabel2, nameInput2);
+
+    // Create button to enter names
+    let enterButton = document.createElement('button');
+    enterButton.textContent = 'Enter names';
+
+    playersDiv.append(divPlayer1, divPlayer2, enterButton);   
+}
+
+
 // Factory function to create players
 const Player = (name, playSymbol) => {
     return {name, playSymbol};
 };
 
 
- // Module to handle game play
- const Game = () => {
-    // Create a clean grid
-    GameBoard.createGrid();
-
-    // Clear any previous game result
-    document.getElementById('game-result').textContent = '';
+ // Function to handle game play
+function playGame(name1, name2) {    
+    // Clear name input fields
+    let playersDiv = document.getElementById('players');
+    playersDiv.textContent = '';
 
     // Create players
-    const player1 = Player('player1', 'X');
-    const player2 = Player('player2', 'O');
+    const player1 = Player(name1, 'X');
+    const player2 = Player(name2, 'O');
+
+    // Display player names
+    let players = document.createElement('h2');
+    players.textContent = `${player1.name} vs ${player2.name}`;
+    playersDiv.append(players);
+
+    // Create a clean grid
+    GameBoard.createGrid();
 
     // Player 1 goes first
     let currentPlayer = player1;
