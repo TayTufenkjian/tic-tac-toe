@@ -139,6 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         } else {
                             // pass
                         }
+
+                        // If there is no winner and the game is over, then it's a tie
+                        if (playCounter === 9) {
+                            return console.log('It\'s a tie');
+                        }
                     }
                 }
             })
