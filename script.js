@@ -75,9 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Add the player's symbol to the board array
                     if (currentPlayer === player1) {
                         targetSquare.textContent = player1.playSymbol;
+                        targetSquare.classList.add('player1');
                         currentPlayer = player2;
                     } else {
                         targetSquare.textContent = player2.playSymbol;
+                        targetSquare.classList.add('player2');
                         currentPlayer = player1;
                     }
                     GameBoard.addToGrid(targetSquare.textContent, targetSquare.dataset.row, targetSquare.dataset.col);

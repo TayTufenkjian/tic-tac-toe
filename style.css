@@ -7,6 +7,11 @@ body {
     margin: 0;
 }
 
+h1, .grid-square {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 3rem;
+}
+
 main {
     align-content: center;
     display: grid;
@@ -41,5 +46,13 @@ main {
 
 .grid-square:nth-child(1), .grid-square:nth-child(4), .grid-square:nth-child(7) {
     border-left: 2px solid #DADCE0;
+}
+
+.player1 {
+    color: rgb(168, 83, 248);
+}
+
+.player2 {
+    color: rgb(24, 227, 227);
 }
 
