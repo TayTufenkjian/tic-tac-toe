@@ -94,27 +94,55 @@ document.addEventListener('DOMContentLoaded', () => {
                                         break;
                                }
                            }
-                           if (rowString === 'XXX') {
-                               return console.log('Xs win');
-                           } else if (rowString === 'OOO') {
-                                return console.log('Os win');
-                               }
-                           else {
-                               continue;
+                           switch (rowString) {
+                               case 'XXX':
+                                   return console.log('Xs win');
+                                case 'OOO':
+                                    return console.log('Os win');
+                                default:
+                                    break;
                            }
                        }
-                    
 
                         // Check columns
+                        for (let i = 0; i < 3; i++) {
+                            let colString = '';
+                            for (let j = 0; j < 3; j++) {
+                                switch (GameBoard.getFromGrid(j, i)) {
+                                    case 'X':
+                                        colString += 'X';
+                                        break;
+                                    case 'O':
+                                        colString += 'O';
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            switch (colString) {
+                                case 'XXX':
+                                    return console.log('Xs win');
+                                 case 'OOO':
+                                     return console.log('Os win');
+                                 default:
+                                     break;
+                            }
+                        }
 
-                        // Check diagonal
+                        // Check diagonals
+                        let diagonalString1 = `${GameBoard.getFromGrid(0, 0)}${GameBoard.getFromGrid(1, 1)}${GameBoard.getFromGrid(2, 2)}`;
+                        let diagonalString2 = `${GameBoard.getFromGrid(2, 0)}${GameBoard.getFromGrid(1, 1)}${GameBoard.getFromGrid(0, 2)}`;
+                        if (diagonalString1 === 'XXX' || diagonalString2 === 'XXX') {
+                            return console.log('Xs win');
+                        } else if (diagonalString1 === 'OOO' || diagonalString2 === 'OOO') {
+                            return console.log('Os win');
+                        } else {
+                            // pass
+                        }
                     }
-
                 }
             })
         )
-
-
     })();
 
 });
