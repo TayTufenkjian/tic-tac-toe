@@ -19,7 +19,7 @@ main {
 #game-board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    width: 500px;
+    width: calc(100vh / 2);
 }
 
 #game-result {
@@ -28,8 +28,18 @@ main {
 
 .grid-square {
     align-content: center;
-    border: 1px solid black;
+    border-bottom: 2px solid #DADCE0;
+    border-right: 2px solid #DADCE0;
     display: grid;
-    height: 150px;
+    height:  calc((100vh / 2) / 3);;
     justify-content: center;
 }
+
+.grid-square:nth-child(1), .grid-square:nth-child(2), .grid-square:nth-child(3) {
+    border-top: 2px solid #DADCE0;
+}
+
+.grid-square:nth-child(1), .grid-square:nth-child(4), .grid-square:nth-child(7) {
+    border-left: 2px solid #DADCE0;
+}
+
