@@ -13,12 +13,17 @@ main {
     grid-template-columns: 1fr;
     height: 100%;
     justify-items: center;
+    row-gap: 2rem;
 }
 
 #game-board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     width: 500px;
+}
+
+#game-result {
+    height: 3rem;
 }
 
 .grid-square {

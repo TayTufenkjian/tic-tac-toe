@@ -37,10 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return {addToGrid, getFromGrid};
     })();
 
+
     // Factory function to create players
     const Player = (name, playSymbol) => {
         return {name, playSymbol};
     };
+
 
     // Module to handle game play
     const Game = (() => {
@@ -52,6 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initialize the count of plays
         let playCounter = 0;
+
+        // Function to display game result
+        function showGameResult(winner) {
+            let resultDiv = document.getElementById('game-result');
+            resultDiv.textContent = (winner === 'tie' ? 'It\'s a tie' : `${winner.name} wins!`);
+        }
 
         // Listen for click on each grid square
         let squares = document.querySelectorAll('.grid-square');
@@ -79,6 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // so at that point we should check for a win
                     if (playCounter >= 5) {
 
+                        let winner;
+
                         // Check rows
                        for (let i = 0; i < 3; i++) {
                            let rowString = '';
@@ -96,9 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
                            }
                            switch (rowString) {
                                case 'XXX':
-                                   return console.log('Xs win');
+                                   winner = player1;
+                                   break;
                                 case 'OOO':
-                                    return console.log('Os win');
+                                    winner = player2;
+                                    break;
                                 default:
                                     break;
                            }
@@ -121,9 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                             switch (colString) {
                                 case 'XXX':
-                                    return console.log('Xs win');
+                                    winner = player1;
+                                    break;
                                  case 'OOO':
-                                     return console.log('Os win');
+                                    winner = player2;
+                                    break;
                                  default:
                                      break;
                             }
@@ -133,16 +147,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         let diagonalString1 = `${GameBoard.getFromGrid(0, 0)}${GameBoard.getFromGrid(1, 1)}${GameBoard.getFromGrid(2, 2)}`;
                         let diagonalString2 = `${GameBoard.getFromGrid(2, 0)}${GameBoard.getFromGrid(1, 1)}${GameBoard.getFromGrid(0, 2)}`;
                         if (diagonalString1 === 'XXX' || diagonalString2 === 'XXX') {
-                            return console.log('Xs win');
+                            winner = player1;
                         } else if (diagonalString1 === 'OOO' || diagonalString2 === 'OOO') {
-                            return console.log('Os win');
+                            winner = player2;
                         } else {
                             // pass
                         }
 
+                        if (winner) {
+                            showGameResult(winner);
+                        }
+
                         // If there is no winner and the game is over, then it's a tie
-                        if (playCounter === 9) {
-                            return console.log('It\'s a tie');
+                        if (!winner && playCounter === 9) {
+                            showGameResult('tie');
                         }
                     }
                 }
